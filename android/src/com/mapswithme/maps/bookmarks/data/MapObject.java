@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.mapswithme.maps.ads.Banner;
+import com.mopub.common.MoPub;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -161,6 +162,11 @@ public class MapObject implements Parcelable
   @Nullable
   public List<Banner> getBanners()
   {
+    if (mBanners != null)
+    {
+      mBanners = new ArrayList<>();
+      mBanners.add(new Banner("634b6f7c4eb14c8cbea217ddee9e2f6e", 3));
+    }
     return mBanners;
   }
 

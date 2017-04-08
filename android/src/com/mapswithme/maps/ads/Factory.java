@@ -25,10 +25,17 @@ public class Factory
                                                      @Nullable AdTracker tracker)
   {
     String provider = banner.getProvider();
-    if (provider.equals(Providers.FACEBOOK))
-      return createFacebookAdLoader(cacheListener, tracker);
-    else
-      return createMyTargetAdLoader(cacheListener, tracker);
+    switch (provider)
+    {
+      case Providers.FACEBOOK:
+        return createFacebookAdLoader(cacheListener, tracker);
+      case Providers.MY_TARGET:
+        return createMyTargetAdLoader(cacheListener, tracker);
+      case Providers.MOPUB:
+        return new MopubNativeDownloader(cacheListener, tracker);
+      default:
+        throw new UnsupportedOperationException("Unknown ads provider: " + provider);
+    }
   }
 
   @NonNull
