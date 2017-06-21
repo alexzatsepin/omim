@@ -140,6 +140,11 @@ public class UGC
     }
   }
 
+  static void onUGCObtained(@NonNull UGC ugc)
+  {
+
+  }
+
   public interface UGCListener
   {
     void onUGCReviewsObtained(@NonNull List<Review> reviews);

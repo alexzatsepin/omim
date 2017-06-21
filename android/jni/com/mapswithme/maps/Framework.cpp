@@ -560,6 +560,16 @@ uber::RideRequestLinks Framework::GetUberLinks(string const & productId, ms::Lat
   return uber::Api::GetRideRequestLinks(productId, from, to);
 }
 
+void Framework::RequestUGC(JNIEnv * env, ugc::Api::UGCCallback const & ugcCallback)
+{
+  ugc::Api & ugcApi = m_work.GetUGCApi();
+
+  //TODO: consider to use FeatureId object in java
+  auto const & info = g_framework->GetPlacePageInfo();
+
+  ugcApi.GetUGC(info.GetID(), ugcCallback);
+}
+
 int Framework::ToDoAfterUpdate() const
 {
   return (int) m_work.ToDoAfterUpdate();
