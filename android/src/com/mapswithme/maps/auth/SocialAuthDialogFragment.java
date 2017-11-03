@@ -20,6 +20,14 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.mapswithme.maps.Framework;
 import com.mapswithme.maps.R;
 import com.mapswithme.maps.base.BaseMwmDialogFragment;
@@ -31,11 +39,32 @@ import java.lang.ref.WeakReference;
 
 public class SocialAuthDialogFragment extends BaseMwmDialogFragment
 {
-
   private static final Logger LOGGER = LoggerFactory.INSTANCE.getLogger(LoggerFactory.Type.MISC);
   private static final String TAG = SocialAuthDialogFragment.class.getSimpleName();
+  private static final int REQ_CODE_GOOGLE_SIGN_IN = 103;
   @NonNull
-  private final CallbackManager mCallbackManager = CallbackManager.Factory.create();
+  private final CallbackManager mFBCallbackManager = CallbackManager.Factory.create();
+  @SuppressWarnings("NullableProblems")
+  @NonNull
+  private GoogleApiClient mGoogleApiClient;
+
+  @Override
+  public void onCreate(@Nullable Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("1033279251462-k2pp753lp1f39dacjn0pkurcc8pbbvsi.apps.googleusercontent.com")
+            .requestEmail()
+            .build();
+    mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+            .enableAutoManage(getActivity(), new GoogleApiClient.OnConnectionFailedListener() {
+              @Override
+              public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+              }
+            })
+            .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+            .build();
+  }
 
   @NonNull
   @Override
@@ -54,7 +83,17 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
     LoginButton button = (LoginButton) view.findViewById(R.id.loging_button);
     button.setReadPermissions(Constants.FACEBOOK_PERMISSIONS);
     button.setFragment(this);
-    button.registerCallback(mCallbackManager, new FBCallback(this));
+    button.registerCallback(mFBCallbackManager, new FBCallback(this));
+    SignInButton signInButton = (SignInButton) view.findViewById(R.id.sign_in_button);
+    signInButton.setSize(SignInButton.SIZE_STANDARD);
+    signInButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        GoogleAuthUtil.getToken
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, REQ_CODE_GOOGLE_SIGN_IN);
+      }
+    });
     return view;
   }
 
@@ -62,12 +101,7 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
   public void onResume()
   {
     super.onResume();
-    AccessToken token = AccessToken.getCurrentAccessToken();
-    String tokenValue = null;
-    if (token != null)
-      tokenValue = token.getToken();
-
-    if (TextUtils.isEmpty(tokenValue))
+    if (isGoogleTokenEmtpy() && isFBTokenEmpty())
     {
       Statistics.INSTANCE.trackEvent(Statistics.EventName.UGC_AUTH_SHOWN);
       return;
@@ -75,6 +109,21 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
 
     LOGGER.i(TAG, "Social token is already obtained");
     dismiss();
+  }
+
+  private boolean isGoogleTokenEmtpy()
+  {
+    return true;
+  }
+
+  private boolean isFBTokenEmpty()
+  {
+    AccessToken token = AccessToken.getCurrentAccessToken();
+    String tokenValue = null;
+    if (token != null)
+      tokenValue = token.getToken();
+
+    return TextUtils.isEmpty(tokenValue);
   }
 
   private void sendResult(int resultCode, @Nullable String socialToken,
@@ -98,7 +147,27 @@ public class SocialAuthDialogFragment extends BaseMwmDialogFragment
   public void onActivityResult(int requestCode, int resultCode, Intent data)
   {
     super.onActivityResult(requestCode, resultCode, data);
-    mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == REQ_CODE_GOOGLE_SIGN_IN)
+    {
+      GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+      handleGoogleSignInResult(result);
+      return;
+    }
+
+    mFBCallbackManager.onActivityResult(requestCode, resultCode, data);
+  }
+
+  private void handleGoogleSignInResult(GoogleSignInResult result) {
+    LOGGER.d(TAG, "handleGoogleSignInResult:" + result.isSuccess());
+    if (result.isSuccess()) {
+      // Signed in successfully, show authenticated UI.
+      GoogleSignInAccount acct = result.getSignInAccount();
+      LOGGER.d(TAG, "handleGoogleSignInResult token:" + acct.getIdToken());
+      // TODO:
+    } else {
+      // Signed out, show unauthenticated UI.
+      // TODO:
+    }
   }
 
   @Override
