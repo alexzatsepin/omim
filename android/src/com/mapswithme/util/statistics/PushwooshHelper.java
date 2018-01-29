@@ -5,10 +5,12 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.mapswithme.maps.MwmApplication;
 import com.mapswithme.util.log.Logger;
 import com.mapswithme.util.log.LoggerFactory;
-import com.pushwoosh.PushManager;
-import com.pushwoosh.SendPushTagsCallBack;
+import ru.mail.libnotify.api.NotificationFactory;
+//import com.pushwoosh.PushManager;
+//import com.pushwoosh.SendPushTagsCallBack;
 
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
@@ -16,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class PushwooshHelper implements SendPushTagsCallBack
+public final class PushwooshHelper /*implements SendPushTagsCallBack*/
 {
   private static final Logger LOGGER = LoggerFactory.INSTANCE.getLogger(LoggerFactory.Type.MISC);
   private static final PushwooshHelper sInstance = new PushwooshHelper();
@@ -53,7 +55,8 @@ public final class PushwooshHelper implements SendPushTagsCallBack
 
   private void sendTags(Map<String, Object> tags)
   {
-    synchronized (mSyncObject)
+    NotificationFactory.get(MwmApplication.get()).collectEventBatch(tags);
+/*    synchronized (mSyncObject)
     {
       if (!canSendTags())
       {
@@ -89,10 +92,10 @@ public final class PushwooshHelper implements SendPushTagsCallBack
         }
       };
       mTask.execute((Void) null);
-    }
+    }*/
   }
 
-  @Override
+ /* @Override
   public void taskStarted() {}
 
   @Override
@@ -130,7 +133,7 @@ public final class PushwooshHelper implements SendPushTagsCallBack
         }
       }
     });
-  }
+  }*/
 
   private boolean canSendTags()
   {

@@ -44,8 +44,10 @@ import com.mapswithme.util.statistics.PushwooshHelper;
 import com.mapswithme.util.statistics.Statistics;
 import com.my.tracker.MyTracker;
 import com.my.tracker.MyTrackerParams;
-import com.pushwoosh.PushManager;
+/*import com.pushwoosh.PushManager;*/
 import io.fabric.sdk.android.Fabric;
+import ru.mail.libnotify.api.NotificationFactory;
+import ru.mail.notify.core.utils.LogReceiver;
 
 import java.io.File;
 import java.util.List;
@@ -173,6 +175,7 @@ public class MwmApplication extends Application
   private void initCoreIndependentSdks()
   {
     initCrashlytics();
+    initLibnotify();
     initPushWoosh();
     initAppsFlyer();
   }
@@ -400,9 +403,60 @@ public class MwmApplication extends Application
     System.loadLibrary("mapswithme");
   }
 
+  private void initLibnotify()
+  {
+    if (BuildConfig.DEBUG || BuildConfig.BUILD_TYPE.equals("beta"))
+    {
+      NotificationFactory.enableDebugMode();
+      NotificationFactory.setLogReceiver(new LogReceiver() {
+        @Override
+        public void v(String tag, String message)
+        {
+          Log.d("LIBNOTIFY-" + tag, message);
+        }
+
+        @Override
+        public void v(String tag, String message, Throwable exception)
+        {
+          Log.v("LIBNOTIFY-" + tag, message, exception);
+        }
+
+        @Override
+        public void e(String tag, String message)
+        {
+          Log.e("LIBNOTIFY-" + tag, message);
+        }
+
+        @Override
+        public void e(String tag, String message, Throwable exception)
+        {
+          Log.e("LIBNOTIFY-" + tag, message, exception);
+        }
+
+        @Override
+        public void d(String tag, String message)
+        {
+          Log.d("LIBNOTIFY-" + tag, message);
+        }
+
+        @Override
+        public void d(String tag, String message, Throwable exception)
+        {
+          Log.d("LIBNOTIFY-" + tag, message, exception);
+        }
+      });
+      //TODO: temporary commented.
+/*      NotificationFactory.setLogReceiver(logReceiver);
+      NotificationFactory.setUncaughtExceptionListener(uncaughtExceptionListener);*/
+    }
+    //initialize libnotify before any subsequent usage (this method is designed to be as
+    //lightweight as possible, to avoid any applications's start performance impact)
+    NotificationFactory.initialize(this);
+  }
+
   private void initPushWoosh()
   {
-    try
+/*    try
     {
       if (BuildConfig.PW_APPID.equals(PW_EMPTY_APP_ID))
         return;
@@ -418,7 +472,7 @@ public class MwmApplication extends Application
     catch(Exception e)
     {
       mLogger.e("Pushwoosh", "Failed to init Pushwoosh", e);
-    }
+    }*/
   }
 
   private void initAppsFlyer()

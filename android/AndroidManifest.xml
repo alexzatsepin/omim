@@ -457,7 +457,10 @@
       </intent-filter>
     </receiver>
 
-    <receiver
+
+    <!-- TODO: temporary disabled -->
+
+<!--    <receiver
         android:name="com.google.android.gms.gcm.GcmReceiver"
         android:exported="true"
         android:permission="com.google.android.c2dm.permission.SEND">
@@ -465,9 +468,9 @@
         <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
         <category android:name="${applicationId}"/>
       </intent-filter>
-    </receiver>
+    </receiver>-->
 
-    <service
+<!--    <service
         android:name="com.pushwoosh.GCMListenerService"
         android:exported="false">
       <intent-filter>
@@ -481,14 +484,14 @@
       <intent-filter>
         <action android:name="com.google.android.gms.iid.InstanceID"/>
       </intent-filter>
-    </service>
+    </service>-->
 
-    <service
+<!--    <service
         android:name="com.pushwoosh.GCMRegistrationService"
         android:exported="false"/>
 
     <service
-        android:name="com.pushwoosh.location.GeoLocationService"/>
+        android:name="com.pushwoosh.location.GeoLocationService"/>-->
 
     <!-- Catches app upgraded intent -->
     <receiver android:name=".background.UpgradeReceiver">
