@@ -59,7 +59,7 @@ public class BookmarkBackupController
       return;
     }
 
-    boolean isEnabled = false /** TODO: add real call here **/;
+    boolean isEnabled = false; // TODO: read setting from the core here;
 
     if (isEnabled)
     {
