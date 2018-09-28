@@ -2434,7 +2434,7 @@
 
 "purchase_processing" = "Your purchase is being processed…";
 
-"tips_bookmarks_catalog_title" = "Can't plan a route over interesting locations?";
+"tips_bookmarks_catalog_title" = "Offline guides for every kind of journey";
 
 "tips_bookmarks_catalog_message" = "Download and plan tourist routes over interesting locations in different cities of the world.";
 
@@ -2466,9 +2466,9 @@
 
 "server_unavailable_message" = "The purchase will be completed later. If the error persists, please contact support@maps.me.";
 
-"offline_fiters_check_in" = "Connect to the internet to filter hotels by dates.";
-
 "rutaxi_title" = "RuTaxi";
+
+"offline_fiters_check_in" = "Connect to the internet to filter hotels by dates.";
 
 
 /**********  Partners  **********/
