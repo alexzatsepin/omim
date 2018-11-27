@@ -146,7 +146,6 @@ import static com.mapswithme.util.statistics.Statistics.ParamValue.TRAFFIC;
 import static com.mapswithme.util.statistics.Statistics.ParamValue.TRANSIT;
 import static com.mapswithme.util.statistics.Statistics.ParamValue.UNKNOWN;
 import static com.mapswithme.util.statistics.Statistics.ParamValue.VEHICLE;
-import static com.mapswithme.util.statistics.Statistics.ParamValue.VIATOR;
 
 public enum Statistics
 {
@@ -529,7 +528,6 @@ public enum Statistics
     public static final String COPY_LINK = "copy_link";
     static final String SEARCH_BOOKING_COM = "Search.Booking.Com";
     static final String OPENTABLE = "OpenTable";
-    static final String VIATOR = "Viator.Com";
     static final String LOCALS_EXPERTS = "Locals.Maps.Me";
     static final String SEARCH_RESTAURANTS = "Search.Restaurants";
     static final String SEARCH_ATTRACTIONS = "Search.Attractions";
@@ -1085,8 +1083,6 @@ public enum Statistics
     {
       case Sponsored.TYPE_BOOKING:
         return BOOKING_COM;
-      case Sponsored.TYPE_VIATOR:
-        return VIATOR;
       case Sponsored.TYPE_OPENTABLE:
         return OPENTABLE;
       case Sponsored.TYPE_HOLIDAY:
