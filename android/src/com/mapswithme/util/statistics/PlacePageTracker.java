@@ -52,12 +52,12 @@ public class PlacePageTracker
 
   public void onOpened()
   {
-    if (mPlacePageView.getState() == PlacePageView.State.DETAILS)
+/*    if (mPlacePageView.getState() == PlacePageView.State.DETAILS)
     {
       Sponsored sponsored = mPlacePageView.getSponsored();
       if (sponsored != null)
         Statistics.INSTANCE.trackSponsoredOpenEvent(sponsored);
-    }
+    }*/
   }
 
   private void trackTaxiVisibility()

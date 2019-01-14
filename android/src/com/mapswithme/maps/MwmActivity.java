@@ -15,6 +15,7 @@ import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -22,9 +23,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -130,7 +134,6 @@ import com.mapswithme.util.sharing.ShareOption;
 import com.mapswithme.util.sharing.SharingHelper;
 import com.mapswithme.util.sharing.TargetUtils;
 import com.mapswithme.util.statistics.AlohaHelper;
-import com.mapswithme.util.statistics.PlacePageTracker;
 import com.mapswithme.util.statistics.Statistics;
 
 import java.io.Serializable;
@@ -242,8 +245,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   private boolean mRestoreRoutingPlanFragmentNeeded;
   @Nullable
   private Bundle mSavedForTabletState;
-  @Nullable
-  private PlacePageTracker mPlacePageTracker;
+//  @Nullable
+//  private PlacePageTracker mPlacePageTracker;
   @Nullable
   private PurchaseController<PurchaseCallback> mAdsRemovalPurchaseController;
   @Nullable
@@ -552,6 +555,9 @@ public class MwmActivity extends BaseMwmFragmentActivity
     return super.getThemeResourceId(theme);
   }
 
+  private ViewGroup mPpButtons;
+  private ViewGroup mPPPButtons;
+
   @SuppressLint("InlinedApi")
   @CallSuper
   @Override
@@ -567,7 +573,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
 
     setContentView(R.layout.activity_map);
     mIsLaunchByDeepLink = getIntent().getBooleanExtra(EXTRA_LAUNCH_BY_DEEP_LINK, false);
-    initViews();
+    initViews(savedInstanceState);
 
     Statistics.INSTANCE.trackConnectionState();
 
@@ -599,15 +605,27 @@ public class MwmActivity extends BaseMwmFragmentActivity
     initTips();
   }
 
-  private void initViews()
+  private void initViews(@Nullable Bundle savedInstanceState)
   {
     initMap();
     initNavigationButtons();
 
-    mPlacePage = findViewById(R.id.info_box);
-    mPlacePage.setOnVisibilityChangedListener(this);
-    mPlacePage.setOnAnimationListener(this);
-    mPlacePageTracker = new PlacePageTracker(mPlacePage);
+    View bottomDrawer = findViewById(R.id.bottom_drawer);
+    View bottomDrawer2 = findViewById(R.id.bottom_drawer2);
+    if (savedInstanceState == null)
+    {
+      BottomSheetBehavior<View> bottomDrawerBehavior = BottomSheetBehavior.from(bottomDrawer);
+      bottomDrawerBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+      BottomSheetBehavior<View> bottomDrawer2Behaviour = BottomSheetBehavior.from(bottomDrawer2);
+      bottomDrawer2Behaviour.setState(BottomSheetBehavior.STATE_HIDDEN);
+    }
+
+    mPPPButtons = bottomDrawer2.findViewById(R.id.pp__buttons);
+    mPpButtons = mPPPButtons.findViewById(R.id.container);
+
+    mPlacePage = bottomDrawer.findViewById(R.id.info_box);
+    mPlacePage.initButtons(mPPPButtons);
 
     if (!mIsTabletLayout)
     {
@@ -909,10 +927,10 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     if (!mPlacePage.isHidden())
     {
-      outState.putInt(STATE_PP, mPlacePage.getState().ordinal());
+//      outState.putInt(STATE_PP, mPlacePage.getState().ordinal());
       outState.putParcelable(STATE_MAP_OBJECT, mPlacePage.getMapObject());
-      if (isChangingConfigurations())
-        mPlacePage.setState(State.HIDDEN);
+//      if (isChangingConfigurations())
+//        mPlacePage.setState(State.HIDDEN);
     }
 
     if (!mIsTabletLayout && RoutingController.get().isPlanning())
@@ -965,11 +983,27 @@ public class MwmActivity extends BaseMwmFragmentActivity
         @Override
         public void onSetMapObjectComplete()
         {
-          mPlacePage.setState(state);
+          View bottomDrawer = findViewById(R.id.bottom_drawer);
+          BottomSheetBehavior<View> bottomDrawerBehavior = BottomSheetBehavior.from(bottomDrawer);
+          bottomDrawerBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback()
+          {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState)
+            {
+              Log.d("XXX", "onStateChanged newState = " + newState);
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset)
+            {
+              Log.d("XXX", "onSlide slideOffset = " + slideOffset);
+            }
+          });
+          bottomDrawerBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
       });
-      if (mPlacePageTracker != null)
-        mPlacePageTracker.setMapObject(mapObject);
+/*      if (mPlacePageTracker != null)
+        mPlacePageTracker.setMapObject(mapObject);*/
     }
 
     if (mIsTabletLayout)
@@ -1280,7 +1314,7 @@ public class MwmActivity extends BaseMwmFragmentActivity
   protected void onResume()
   {
     super.onResume();
-    mPlacePageRestored = mPlacePage.getState() != State.HIDDEN;
+    mPlacePageRestored = false;
     mSearchController.refreshToolbar();
     mMainMenu.onResume(new Runnable()
     {
@@ -1504,14 +1538,37 @@ public class MwmActivity extends BaseMwmFragmentActivity
       {
         if (object != null)
         {
-          mPlacePage.setState(object.isExtendedView() ? State.DETAILS : State.PREVIEW);
+//          mPlacePage.setState(object.isExtendedView() ? State.DETAILS : State.PREVIEW);
+          View bottomDrawer = findViewById(R.id.bottom_drawer);
+          BottomSheetBehavior<View> bottomDrawerBehavior = BottomSheetBehavior.from(bottomDrawer);
+          bottomDrawerBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback()
+          {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState)
+            {
+              Log.d("XXX", "onStateChanged newState = " + newState);
+              if (newState == 4)
+              {
+                View buttons = findViewById(R.id.bottom_drawer2);
+                BottomSheetBehavior<View> buttonsBehaviour = BottomSheetBehavior.from(buttons);
+                buttonsBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
+              }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset)
+            {
+              Log.d("XXX", "onSlide slideOffset = " + slideOffset);
+            }
+          });
+          bottomDrawerBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
           Framework.logLocalAdsEvent(Framework.LocalAdsEventType.LOCAL_ADS_EVENT_OPEN_INFO, object);
         }
       }
       mPlacePageRestored = false;
     });
-    if (mPlacePageTracker != null)
-      mPlacePageTracker.setMapObject(object);
+/*    if (mPlacePageTracker != null)
+      mPlacePageTracker.setMapObject(object);*/
 
     if (UiUtils.isVisible(mFadeView))
       mFadeView.fadeOut();
@@ -1637,8 +1694,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
     {
       Framework.nativeDeactivatePopup();
       mPlacePage.setMapObject(null, false, null);
-      if (mPlacePageTracker != null)
-        mPlacePageTracker.onHidden();
+/*      if (mPlacePageTracker != null)
+        mPlacePageTracker.onHidden();*/
     }
   }
 
@@ -1652,10 +1709,10 @@ public class MwmActivity extends BaseMwmFragmentActivity
                                              : Statistics.EventName.PP_CLOSE);
     AlohaHelper.logClick(isVisible ? AlohaHelper.PP_OPEN
                                    : AlohaHelper.PP_CLOSE);
-    if (mPlacePageTracker != null && isVisible)
+/*    if (mPlacePageTracker != null && isVisible)
     {
       mPlacePageTracker.onOpened();
-    }
+    }*/
   }
 
   @Override
@@ -1663,8 +1720,8 @@ public class MwmActivity extends BaseMwmFragmentActivity
   {
     if (mNavAnimationController != null)
       mNavAnimationController.onPlacePageMoved(translationY);
-    if (mPlacePageTracker != null)
-      mPlacePageTracker.onMove();
+/*    if (mPlacePageTracker != null)
+      mPlacePageTracker.onMove();*/
   }
 
   @Override
