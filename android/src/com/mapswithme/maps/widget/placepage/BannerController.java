@@ -271,7 +271,7 @@ final class BannerController
       return;
 
     mOpened = true;
-    setFrameHeight(WRAP_CONTENT);
+//    setFrameHeight(WRAP_CONTENT);
     mMessage.setMaxLines(MAX_MESSAGE_LINES);
     mTitle.setMaxLines(MAX_TITLE_LINES);
     updateVisibility();
@@ -290,7 +290,7 @@ final class BannerController
       return false;
 
     mOpened = false;
-    setFrameHeight((int) mCloseFrameHeight);
+//    setFrameHeight((int) mCloseFrameHeight);
     UiUtils.hide(mIcon);
     mMessage.setMaxLines(MIN_MESSAGE_LINES);
     mTitle.setMaxLines(MIN_TITLE_LINES);
@@ -405,6 +405,39 @@ final class BannerController
   boolean isOpened()
   {
     return mOpened;
+  }
+
+  float mCurrentRatio;
+  int mInitialSize = -1;
+  int mTargetSize = - 1;
+  boolean isDown = false;
+  boolean isUp = true;
+
+  public void changeBannerSize(float ratio)
+  {
+    LOGGER.d("XXX", "increase banner ratio = " + ratio + " size = " + mBannerView.getMeasuredHeight());
+    if (mInitialSize == -1)
+    {
+      mInitialSize = 112;
+      mTargetSize = 180;
+    }
+
+    if (ratio > 0.2 && isUp)
+      open();
+
+    if (mCurrentRatio > ratio && isUp)
+    {
+      isDown = true;
+      isUp = false;
+      mInitialSize = mBannerView.getMeasuredHeight();
+      mTargetSize = 112;
+      close();
+    }
+
+    ViewGroup.LayoutParams lp = mBannerView.getLayoutParams();
+    lp.height = (int) (mInitialSize + (mTargetSize - mInitialSize) * ratio);
+    mBannerView.setLayoutParams(lp);
+    mCurrentRatio = ratio;
   }
 
   interface BannerListener

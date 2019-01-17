@@ -1552,6 +1552,12 @@ public class MwmActivity extends BaseMwmFragmentActivity
                 View buttons = findViewById(R.id.bottom_drawer2);
                 BottomSheetBehavior<View> buttonsBehaviour = BottomSheetBehavior.from(buttons);
                 buttonsBehaviour.setState(BottomSheetBehavior.STATE_EXPANDED);
+//                mPlacePage.closeBannerDetails();
+              }
+
+              if (newState == 3)
+              {
+//                mPlacePage.openBannerDetails();
               }
             }
 
@@ -1559,6 +1565,10 @@ public class MwmActivity extends BaseMwmFragmentActivity
             public void onSlide(@NonNull View bottomSheet, float slideOffset)
             {
               Log.d("XXX", "onSlide slideOffset = " + slideOffset);
+              if (slideOffset < 0 )
+                return;
+
+              mPlacePage.changeBannerSize(slideOffset);
             }
           });
           bottomDrawerBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);

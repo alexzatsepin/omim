@@ -499,6 +499,21 @@ public class PlacePageView extends RelativeLayout
     initPlaceDescriptionView();
   }
 
+  public void openBannerDetails()
+  {
+    mBannerController.open();
+  }
+
+  public void changeBannerSize(float ratio)
+  {
+    mBannerController.changeBannerSize(ratio);
+  }
+
+  public void closeBannerDetails()
+  {
+    mBannerController.close();
+  }
+
   public void initButtons(@NonNull ViewGroup ppButtonsLayout)
   {
     mButtons = new PlacePageButtons(this, ppButtonsLayout.findViewById(R.id.container), new PlacePageButtons.ItemListener()
@@ -2107,21 +2122,6 @@ public class PlacePageView extends RelativeLayout
   public void onBookmarkSaved(long bookmarkId)
   {
     setMapObject(BookmarkManager.INSTANCE.getBookmark(bookmarkId), true, null);
-  }
-
-  public boolean isBannerTouched(@NonNull MotionEvent event)
-  {
-    return mBannerController != null && mBannerController.isActionButtonTouched(event);
-  }
-
-  public boolean isLeaveReviewButtonTouched(@NonNull MotionEvent event)
-  {
-    return mUgcController != null && mUgcController.isLeaveReviewButtonTouched(event);
-  }
-
-  public boolean isSearchSimilarHotelsButtonTouched(@NonNull MotionEvent event)
-  {
-    return UiUtils.isViewTouched(event, mPreview.findViewById(R.id.search_hotels_btn));
   }
 
   @Override
