@@ -1558,6 +1558,7 @@
 	<string name="speedcams_alert_title_carplay_2">هشدارهای سرعت</string>
 	<string name="download_map_carplay">لطفا نقشه ها را در نرم افزار MAPS.ME روی دستگاه خود دانلود کنید</string>
 	<string name="carplay_roundabout_exit">خروجی %s</string>
+	<string name="Religious_places">اماکن مقدس</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aeroway.aerodrome">فرودگاه</string>

@@ -1615,6 +1615,7 @@
 	<string name="speedcams_alert_title_carplay_2">Over cameras</string>
 	<string name="download_map_carplay">Download kaarten in de MAPS.ME app op uw apparaat</string>
 	<string name="carplay_roundabout_exit">Afrit nr. %s</string>
+	<string name="Religious_places">Religieuze plaatsen</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Kabelwagenstation</string>

@@ -1623,6 +1623,7 @@
 	<string name="speedcams_alert_title_carplay_2">Rych. varování</string>
 	<string name="download_map_carplay">Stáhněte si prosím mapy do aplikace MAPS.ME ve vašem zařízení</string>
 	<string name="carplay_roundabout_exit">%s výjezd</string>
+	<string name="Religious_places">Posvátná místa</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Stanice lanové dráhy</string>

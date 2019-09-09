@@ -1618,6 +1618,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info om kameror</string>
 	<string name="download_map_carplay">Ladda ner kartor i applikation MAPS.ME på din enhet</string>
 	<string name="carplay_roundabout_exit">%s utgången</string>
+	<string name="Religious_places">Heliga platser</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Linbanestation</string>

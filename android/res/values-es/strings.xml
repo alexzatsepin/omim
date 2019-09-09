@@ -1608,6 +1608,7 @@
 	<string name="speedcams_alert_title_carplay_2">Alerta velocid.</string>
 	<string name="download_map_carplay">Descarga mapas en la aplicación MAPS.ME en tu dispositivo</string>
 	<string name="carplay_roundabout_exit">%s desviación</string>
+	<string name="Religious_places">Lugares sagrados</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Estación de teleférico</string>

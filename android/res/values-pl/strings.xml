@@ -1619,6 +1619,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info o kamerach</string>
 	<string name="download_map_carplay">Pobierz mapy do aplikacji MAPS.ME na swoje urządzenie</string>
 	<string name="carplay_roundabout_exit">%s zjazd</string>
+	<string name="Religious_places">Święte miejsca</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Stacja kolejki linowej</string>

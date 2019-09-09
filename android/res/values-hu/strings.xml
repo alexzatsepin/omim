@@ -1615,6 +1615,7 @@
 	<string name="speedcams_alert_title_carplay_2">Sebességjelzés</string>
 	<string name="download_map_carplay">Kérjük, töltsd le a térképeket a MAPS.ME alkalmazásban az eszközödre</string>
 	<string name="carplay_roundabout_exit">%s kijárat</string>
+	<string name="Religious_places">Vallási helyek</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Felvonóállomás</string>

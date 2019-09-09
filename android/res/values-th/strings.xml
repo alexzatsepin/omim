@@ -1619,6 +1619,7 @@
 	<string name="speedcams_alert_title_carplay_2">เตือนความเร็ว</string>
 	<string name="download_map_carplay">โปรดดาวน์โหลดแผนที่ในแอพฯ MAPS.ME บนอุปกรณ์ของคุณ</string>
 	<string name="carplay_roundabout_exit">ทางออกที่ %s</string>
+	<string name="Religious_places">สถานที่ทางศาสนา</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">สถานีกระเช้าลอยฟ้า</string>

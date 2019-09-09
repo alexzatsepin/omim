@@ -1371,6 +1371,7 @@
 	<string name="speedcams_alert_title_carplay_2">Πληροφ. γιαόρια</string>
 	<string name="download_map_carplay">Κάντε λήψη χαρτών στην εφαρμογή MAPS.ME στη συσκευή σας</string>
 	<string name="carplay_roundabout_exit">%s έξοδος</string>
+	<string name="Religious_places">Άγιοι τόποι</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Σταθμός αερομεταφοράς</string>

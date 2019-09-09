@@ -1620,6 +1620,7 @@
 	<string name="speedcams_alert_title_carplay_2">Інфо о камерах</string>
 	<string name="download_map_carplay">Завантажте карти в додатку MAPS.ME на своєму пристрої</string>
 	<string name="carplay_roundabout_exit">%s з’їзд</string>
+	<string name="Religious_places">Святі місця</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Канатна дорога</string>

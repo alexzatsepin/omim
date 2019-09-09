@@ -1610,6 +1610,7 @@
 	<string name="speedcams_alert_title_carplay_2">Cảnh báo tốc độ</string>
 	<string name="download_map_carplay">Vui lòng tải xuống bản đồ trong ứng dụng MAPS.ME trên thiết bị của bạn</string>
 	<string name="carplay_roundabout_exit">Lối ra %s của vòng xuyến</string>
+	<string name="Religious_places">Những nơi tôn nghiêm</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Trạm Cáp Treo</string>

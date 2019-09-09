@@ -1614,6 +1614,7 @@
 	<string name="speedcams_alert_title_carplay_2">Nopeuskamerat</string>
 	<string name="download_map_carplay">Lataa kartat laitteesi MAPS.ME-sovelluksessa</string>
 	<string name="carplay_roundabout_exit">Poistumisramppi %s</string>
+	<string name="Religious_places">Pyhät paikat</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Köysirata-asema</string>

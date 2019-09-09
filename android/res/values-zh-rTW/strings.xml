@@ -1622,6 +1622,7 @@
 	<string name="speedcams_alert_title_carplay_2">攝像頭信息</string>
 	<string name="download_map_carplay">將MAPS.ME軟件中的地圖下載至個人設備中</string>
 	<string name="carplay_roundabout_exit">%s號坡道</string>
+	<string name="Religious_places">聖地</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">纜車站</string>

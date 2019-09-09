@@ -1619,6 +1619,7 @@
 	<string name="speedcams_alert_title_carplay_2">تحذير سريع</string>
 	<string name="download_map_carplay">يُرجى تحميل الخرائط في تطبيق MAPS.ME على جهازك</string>
 	<string name="carplay_roundabout_exit">المخرج رقم %s</string>
+	<string name="Religious_places">أماكن دينية</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">محطة تلفريك</string>

@@ -1610,6 +1610,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info camere</string>
 	<string name="download_map_carplay">Vă rugăm să descărcați hărțile în aplicația MAPS.ME de pe dispozitivul dvs.</string>
 	<string name="carplay_roundabout_exit">%s ieșire</string>
+	<string name="Religious_places">Locuri sfinte</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Stație de teleferic</string>

@@ -1613,6 +1613,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info kecepatan</string>
 	<string name="download_map_carplay">Silakan unduh peta di apl MAPS.ME pada perangkat Anda</string>
 	<string name="carplay_roundabout_exit">Jalan keluar ke %s</string>
+	<string name="Religious_places">Tempat ibadah</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Stasiun kereta gantung</string>

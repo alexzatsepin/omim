@@ -1618,6 +1618,7 @@
 	<string name="speedcams_alert_title_carplay_2">Radar advarsel</string>
 	<string name="download_map_carplay">Download kort i MAPS.ME appen, på din enhed</string>
 	<string name="carplay_roundabout_exit">%s exit</string>
+	<string name="Religious_places">Religiøse steder</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Kabelbanestation</string>

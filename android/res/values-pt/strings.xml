@@ -1618,6 +1618,7 @@
 	<string name="speedcams_alert_title_carplay_2">Avisos de radar</string>
 	<string name="download_map_carplay">Baixar mapas de aplicação MAPS.ME para o seu dispositivo</string>
 	<string name="carplay_roundabout_exit">%s saída</string>
+	<string name="Religious_places">Lugares sagrados</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Estação de teleférico</string>

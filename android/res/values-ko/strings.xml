@@ -1609,6 +1609,7 @@
 	<string name="speedcams_alert_title_carplay_2">속도단속 카메라</string>
 	<string name="download_map_carplay">MAPS.ME 앱 안의 지도들을 디바이스에 다운로드하세요</string>
 	<string name="carplay_roundabout_exit">%s번 출구</string>
+	<string name="Religious_places">종교적 장소</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">케이블카 역</string>

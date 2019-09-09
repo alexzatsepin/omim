@@ -1629,6 +1629,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info Caméras</string>
 	<string name="download_map_carplay">Téléchargez des cartes dans l\'application MAPS.ME sur votre appareil</string>
 	<string name="carplay_roundabout_exit">%s sortie</string>
+	<string name="Religious_places">Lieux saints</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Remontées mécaniques</string>

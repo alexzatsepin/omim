@@ -1614,6 +1614,7 @@
 	<string name="speedcams_alert_title_carplay_2">Info autovelox</string>
 	<string name="download_map_carplay">Scarica l\'applicazione MAPS.ME sul tuo smartphone</string>
 	<string name="carplay_roundabout_exit">%s uscita</string>
+	<string name="Religious_places">Luoghi di culto</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Stazione di rifornimento per auto elettriche</string>

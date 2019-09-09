@@ -1619,6 +1619,7 @@
 	<string name="speedcams_alert_title_carplay_2">Hız uyarıları</string>
 	<string name="download_map_carplay">Lütfen haritaları cihazınıza MAPS.ME uygulamasından indirin</string>
 	<string name="carplay_roundabout_exit">%s çıkış</string>
+	<string name="Religious_places">Dini yerler</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Remontées mécaniques</string>

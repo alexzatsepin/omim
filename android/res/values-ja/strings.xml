@@ -1613,6 +1613,7 @@
 	<string name="speedcams_alert_title_carplay_2">速度警告</string>
 	<string name="download_map_carplay">あなたの機器のMAPS.MEのアプリにマップをダウンロードしてください</string>
 	<string name="carplay_roundabout_exit">第%s出口</string>
+	<string name="Religious_places">宗教に関連した場所</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">ケーブルカー駅</string>

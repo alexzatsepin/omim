@@ -1619,6 +1619,7 @@
 	<string name="speedcams_alert_title_carplay_2">Rýchl. upozorn.</string>
 	<string name="download_map_carplay">Prosím stiahnite si mapy v aplikácii MAPS.ME vo vašom zariadení</string>
 	<string name="carplay_roundabout_exit">%s výjazd</string>
+	<string name="Religious_places">Náboženské miesta</string>
 
 	<!-- SECTION: Types -->
 	<string name="type.aerialway.station">Lanovka</string>
