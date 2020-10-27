@@ -1,6 +1,8 @@
 package com.mapswithme.maps.bookmarks;
 
 import android.content.res.Resources;
+import android.icu.text.LocaleDisplayNames;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +63,6 @@ public class BookmarkCollectionAdapter extends RecyclerView.Adapter<RecyclerView
     {
       BookmarkCategory category = mHolder.getEntity();
       BookmarkManager.INSTANCE.toggleCategoryVisibility(category);
-      category.invertVisibility();
 
       int type = BookmarkManager.INSTANCE.getCompilationType(category.getId());
       String compilationTypeString = type == BookmarkManager.CATEGORY ?
